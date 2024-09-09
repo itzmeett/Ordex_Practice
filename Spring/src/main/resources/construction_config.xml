@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"> <!-- bean definitions here -->
+	<bean name="certificate1"
+		class="com.construction.injection.Certificate" p:name="Java Course"
+		p:duration="4 months" />
+	<bean name="person1" class="com.construction.injection.Person">
+		<constructor-arg value="123" type="int" />
+		<constructor-arg value="Meet Patel" type="String" />
+		<constructor-arg ref="certificate1" />
+
+		<constructor-arg type="List">
+			<list>
+				<value>Cricket</value>
+				<value>Kabaddi</value>
+				<value>Volleyball</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean class="com.construction.injection.Addition" name="add">
+		<constructor-arg type="int" value="45" index="1"/>
+		<constructor-arg type="int" value="78" index="0"/>
+	</bean>
+
+	<!-- <bean name="emp2" class="com.spring.collection.Employee"> </bean> -->
+</beans>

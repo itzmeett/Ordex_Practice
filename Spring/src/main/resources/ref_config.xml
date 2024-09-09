@@ -6,10 +6,8 @@
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"> <!-- bean definitions here -->
-	<bean name="person1" class="com.spring.Spring.Person"
-		p:name="Rohan Patel" p:pid="2341" p:mobile_no="8200349612"
-		p:email="rp@gmail.com" />
-	<bean name="person2" class="com.spring.Spring.Person"
-		p:name="Meet Patel" p:pid="2234" p:mobile_no="9687084888"
-		p:email="meetp@gmail.com" />
+	<bean name="ref1" class="com.reference.injection.Address" p:city="Banglore" p:pincode="380013"/>
+	<bean name="ref2" class="com.reference.injection.Person" p:name="Meet Patel" p:ad-ref="ref1"/>
+		<!-- <property name="name" value="Meet Patel" />
+		<property name="ad" ref="ref1" /> -->
 </beans>

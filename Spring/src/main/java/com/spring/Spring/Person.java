@@ -42,7 +42,7 @@ public class Person {
 	}
 	@Override
 	public String toString() {
-		return "Person [pid=" + pid + ", mobile_no=" + mobile_no + ", email=" + email + ", name=" + name + "]";
+		return "\nPerson_id=" + pid + "\nName=" + name +" \nMobile_no=" + mobile_no + "\nEmail=" + email ;
 	}
 	
 }

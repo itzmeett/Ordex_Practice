@@ -13,32 +13,36 @@ import com.spring.crud.entity.Employee;
 
 @Repository
 public class EmployeeDao {
-	
-	@Autowired
-	private SessionFactory sessionFactory;
+
 	private HibernateTemplate hibernateTemplate;
-	
+
+	@Autowired
+	EmployeeDao(SessionFactory sessionFactory) {
+		this.hibernateTemplate = new HibernateTemplate(sessionFactory);
+
+	}
+
 	@Transactional
 	public void saveEmployees(Employee employee) {
-		sessionFactory.getCurrentSession().save(employee);
+		this.hibernateTemplate.save(employee);
 	}
-	
-	public Employee getEmployee(int id){
+
+	public Employee getEmployee(int id) {
 		Employee emp = this.hibernateTemplate.get(Employee.class, id);
 		return emp;
 	}
-	
-	public List<Employee> getAllEmployees(){
+
+	public List<Employee> getAllEmployees() {
 		List<Employee> emp = this.hibernateTemplate.loadAll(Employee.class);
 		return emp;
 	}
-	
+
 	@Transactional
 	public void deleteEmployee(int id) {
 		Employee emp = this.hibernateTemplate.get(Employee.class, id);
 		this.hibernateTemplate.delete(emp);
 	}
-	
+
 	@Transactional
 	public void updateEmployee(Employee employee) {
 		this.hibernateTemplate.update(employee);

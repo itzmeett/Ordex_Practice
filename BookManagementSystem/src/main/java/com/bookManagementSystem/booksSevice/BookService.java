@@ -1,5 +1,6 @@
 package com.bookManagementSystem.booksSevice;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class BookService {
 			throw new IllegalArgumentException("+++++++++++++++++++++++Invalid Id !!+++++++++++++++++++++++");
 		} else {
 			Optional<Books> singleBook = service.findById(id);
-			return singleBook.orElseThrow(() -> new IllegalArgumentException("+++++++++++++++++++++++Book with id " + id + "does not exist+++++++++++++++++++++++"));
+			return singleBook.orElseThrow(() -> new InputMismatchException("+++++++++++++++++++++++Book with id " + id + " does not exist+++++++++++++++++++++++"));
 		}
 	}
 	
@@ -41,22 +42,29 @@ public class BookService {
 	}
 	
 	// Updating a Book
-	public void updateBook(Integer updateId, String title, String author, float price) {
-		
-		Optional<Books> getBook = service.findById(updateId);
-		if(getBook.isPresent()) {
-			Books updatedBook = getBook.get();
-			updatedBook.setTitle(title);
-			updatedBook.setAuthor(author);
-			updatedBook.setPrice(price);
-			System.out.println("+++++++++++++++++++++++Book with id " +updatedBook.getBid()+" is updated+++++++++++++++++++++++");
-		}else {
-			System.out.println("+++++++++++++++++++++++Book with id "+ updateId +"is not found+++++++++++++++++++++++");
-		}
-	}
+	 public void updateBook(Integer updateId, String title, String author, float price) {
+	        Optional<Books> getBook = service.findById(updateId);
+	        if (getBook.isPresent()) {
+	            Books updatedBook = getBook.get();
+	            updatedBook.setTitle(title);
+	            updatedBook.setAuthor(author);
+	            updatedBook.setPrice(price);
+	            service.save(updatedBook);
+	            System.out.println("+++++++++++++++++++++++Book with id " + updateId + " is updated+++++++++++++++++++++++");
+	        } else {
+	            System.out.println("+++++++++++++++++++++++Book with id " + updateId + " is not found+++++++++++++++++++++++");
+	        }
+	    }
 	
 	// Deleting a Book
 	public void deleteBook(Integer id) {
-		service.deleteById(id);
+		Optional<Books> getBookToDelete = service.findById(id);
+		if(getBookToDelete.get().getBid() == id) {
+			service.deleteById(id);
+			System.out.println("+++++++++++++++++++++++Book with id "+ id +" is successfull deleted.+++++++++++++++++++++++");
+		}
+		else {
+			System.out.println("+++++++++++++++++++++++Book with id "+ id +" is not exist.+++++++++++++++++++++++");
+		}
 	}
 }

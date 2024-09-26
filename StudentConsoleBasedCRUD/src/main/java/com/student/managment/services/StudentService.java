@@ -137,7 +137,7 @@ public class StudentService {
 
 	}
 
- void updatingStudentInfo(Scanner scanner) {
+ public void updatingStudentInfo(Scanner scanner) {
 		try {
 			System.out.println("\nEnter Student valid Id to update details: ");
 			Long updateId = scanner.nextLong();
